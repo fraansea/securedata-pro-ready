@@ -1,12 +1,12 @@
-# Deploying to Vercel
+# Deploying to Render
 
-1. Make sure you have a Vercel account: https://vercel.com/
+1. Make sure you have a Render account: https://render.com/
 2. Push your code to a GitHub/GitLab/Bitbucket repository.
-3. In the Vercel dashboard, click 'New Project' and import your repository.
-4. Set the build command to `npm run vercel-build` (or just `npm run build`).
-5. Set the output/public directory to `build`.
+3. In the Render dashboard, click 'New + > Static Site' and import your repository.
+4. Set the build command to `npm run build` or `yarn build`.
+5. Set the publish directory to `build`.
 6. Add your environment variables (e.g., `REACT_APP_BACKEND_URL`, `REACT_APP_GOOGLE_CLIENT_ID`).
-7. Click 'Deploy'.
+7. Click 'Create Static Site'.
 
 ---
 
