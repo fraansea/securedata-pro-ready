@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo:7.0
+    container_name: secure_vault_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    environment:
+      - MONGO_INITDB_DATABASE=secure_vault
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: secure_vault_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/
+      - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
+      - ENCRYPTION_KEY=WXZd3sCv47AhWrKwAk10W0Tc1TGbVSRhSvNYSnY8rBc=
+    depends_on:
+      - mongo
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: secure_vault_frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+    environment:
+      - REACT_APP_BACKEND_URL=http://backend:8000
+
+volumes:
+  mongo_data: 
